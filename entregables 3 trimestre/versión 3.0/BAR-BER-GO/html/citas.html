@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGENDAMIENTO DE CITAS</title>
+    <link rel="stylesheet" href="/css/citas.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="barbero.html" class="nav-item">INICIO</a></li>
+                    <li><a href="carrito1.html" class="nav-item">PRODUCTOS</a></li>
+                </ul>
+            </nav>
+            <img src="/imagenes/bar-ber-go.png" alt="Logo" class="header-image">
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <section id="booking" class="booking-section">
+            <h2>Agendar Cita</h2>
+            <form action="#" method="post" class="booking-form">
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phone">Teléfono:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="date">Fecha:</label>
+                <input type="date" id="date" name="date" required>
+
+                <label for="time">Hora:</label>
+                <input type="time" id="time" name="time" required>
+
+                <label for="service">Servicio:</label>
+                <select id="service" name="service">
+                    <option value="corte">Corte de Cabello</option>
+                    <option value="afeitado">Afeitado</option>
+                    <option value="peinado">Peinado</option>
+                    <option value="productos">Productos/bar_ber_go</option>
+                </select>
+
+                <button type="button" class="submit-button" >Agendar Cita</button>
+            </form>
+            </section>
+            <section class="video-section">
+                <div class="video-container">
+                    <video  autoplay loop>
+                        <source src="/imagenes/juancho.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </section>
+    </main>
+    
+    <footer class="footer">
+        <p>&copy; 2024 BAR_BER_GO.</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const submitButton = document.querySelector('.submit-button');
+        
+            submitButton.addEventListener('click', () => {
+                // Aquí podrías hacer alguna validación si es necesario
+                alert('su cita quedo agendada');
+        
+                window.location.href = 'calificaciones.html'; // Cambia esto por la URL a la que quieras redirigir
+            });
+        });
+        </script>
+</body>
+</html>
+

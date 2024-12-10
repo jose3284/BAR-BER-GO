@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/inicio.css">
+
+
+
+</head>
+
+<body><header class="encabezado">
+  <img id="bar" src="/imagenes/bar-ber-go.png" alt="Logo">
+  <nav>
+      <ul>
+          <li id="calificacion"><a href="inicio_barbero.html"><h3>barbero</h3></a></li>
+          <li id="tienda"><a href="barbero.html"><h3>usuarios</h3></a></li>
+      </ul>
+  </nav>
+</header>
+    <br><br><br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="/imagenes/bar-ber-go.png" class="img-fluid" alt="logo del sistema de informacion">
+        </div>
+        <div class="col-md-5">
+    <form>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Correo</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          <div id="emailHelp" class="form-text"></div>
+        </div>
+        <div class="mb-3">
+            <label for="inputPassword5" class="form-label">Contraseña</label>
+            <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+            <div id="passwordHelpBlock" class="form-text">
+              La contraseña debe coincidir con lo colocada anteriormente.
+            </div>
+            <button type="button" id="start-button" class="btn btn-outline-primary">Iniciar</button>
+            <div id="passwordHelpBlock" class="form-text"></div>
+              ¿no tienes cuenta?
+              <br>
+            <a href="registro.html" class="btn btn-link">Registrarse</a> 
+            
+      </form>
+    </div>
+    </div>
+    </div>
+    <footer class="footer">
+      <p>&copy; 2024 BAR_BER_GO.</p>
+  </footer>
+   
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>      
+<script>
+  document.getElementById('start-button').addEventListener('click', function() {
+      // Aquí especificas la URL a la que quieres redirigir
+      window.location.href = 'barbero.html'; // Cambia esto por la URL de destino
+  });
+  </script>    
+</body>
+</html>

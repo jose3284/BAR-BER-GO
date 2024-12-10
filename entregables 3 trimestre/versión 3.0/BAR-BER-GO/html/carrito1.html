@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+     integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+      <link rel="stylesheet" href="/css/carrito1.css">
+    
+
+
+
+
+    <title>BAR-BER-GO</title>
+</head>
+<body>
+    <header class="encabezado">
+        <img id="bar" src="/imagenes/bar-ber-go.png" alt="Logo">
+        <nav>
+            <ul>
+                <li id="tienda"><a href="barbero.html"><h3>Inicio</h3></a></li>
+                <li id="calificacion"><a href="calificaciones.html"><h3>Calificación</h3></a></li>
+                <li id="tienda"><a href="citas.html"><h3>Agendamiento</h3></a></li>
+            </ul>
+        </nav>
+    </header>
+    <section class="contenedor">
+        <!-- Contenedor de elementos -->
+        <div class="contenedor-items">
+            <div class="item">
+                <span class="titulo-item">Champú volumizante</span>
+                <img src="img/boxengasse.png" alt="" class="img-item">
+                <span class="precio-item">$17.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Champú volumizante', 17000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Acondicionador suave</span>
+                <img src="img/englishrose.png" alt="" class="img-item">
+                <span class="precio-item">$10.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Acondicionador suave', 10000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Espuma fijadora</span>
+                <img src="img/knocknap.png" alt="" class="img-item">
+                <span class="precio-item">$7.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Espuma fijadora', 7000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Aceite para barba</span>
+                <img src="img/lanight.png" alt="" class="img-item">
+                <span class="precio-item">$25.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Aceite para barba', 25000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Crema para afeitar</span>
+                <img src="img/silverall.png" alt="" class="img-item">
+                <span class="precio-item">$25.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Crema para afeitar', 25000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Loción post-afeitado</span>
+                <img src="img/skinglam.png" alt="" class="img-item">
+                <span class="precio-item">$35.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Loción post-afeitado', 35000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Cera para el cabello</span>
+                <img src="img/midimix.png" alt="" class="img-item">
+                <span class="precio-item">$30.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Cera para el cabello', 30000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Gel para el cabello</span>
+                <img src="img/sirblue.png" alt="" class="img-item">
+                <span class="precio-item">$20.000</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Gel para el cabello', 20000)">Agregar al Carrito</button>
+            </div>
+            <div class="item">
+                <span class="titulo-item">Shampoo para el cabello</span>
+                <img src="img/middlesteel.png" alt="" class="img-item">
+                <span class="precio-item">$35.800</span>
+                <button class="boton-item" onclick="agregarAlCarrito('Shampoo para el cabello', 35800)">Agregar al Carrito</button>
+            </div>
+        </div>
+        <!-- Carrito de Compras -->
+
+      
+        <div class="carrito" id="carrito">
+            <div class="header-carrito">
+                <h2>Tu Carrito</h2>
+            </div>
+
+            <div class="carrito-items" id="carrito-items">
+                <!-- Los items del carrito se agregarán aquí dinámicamente -->
+            </div>
+            <div class="carrito-total">
+                <div class="fila">
+                    <strong>Tu Total</strong>
+                    <span class="carrito-precio-total" id="total-compra">
+                        $0.00
+                    </span>
+                </div>
+                <button class="btn-pagar" onclick="mostrarModal()">Pagar <i class="fa-solid fa-bag-shopping"></i></button>
+            </div>
+        </div>
+  
+    </section>
+
+    <!-- Ventana modal para métodos de pago -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>Proceder con el Pago</h2>
+            <p>Total a pagar: $<span id="modal-total">0.00</span></p>
+            <label for="metodo-pago-modal">Selecciona un método de pago:</label>
+            <select id="metodo-pago-modal">
+                <option value="Tarjeta">Tarjeta</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Nequi</option>
+                <option value="PayPal">Davi Plata</option>
+                <option value="PayPal">PayPal</option>
+            </select>
+            <div class="modal-buttons">
+                <button onclick="confirmarPago()">Confirmar</button>
+                <button onclick="cerrarModal()">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let carrito = [];
+        let total = 0;
+
+        function agregarAlCarrito(nombre, precio) {
+            carrito.push({ nombre, precio });
+            total += precio;
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            const carritoItems = document.getElementById('carrito-items');
+            carritoItems.innerHTML = '';
+
+            carrito.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('carrito-item');
+                div.innerHTML = `
+                    <span class="carrito-item-titulo">${item.nombre}</span>
+                    <span class="carrito-item-precio">$${item.precio.toLocaleString()}</span>
+                `;
+                carritoItems.appendChild(div);
+            });
+
+            document.getElementById('total-compra').innerText = total.toLocaleString();
+            document.getElementById('modal-total').innerText = total.toLocaleString();
+        }
+
+        function mostrarModal() {
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function confirmarPago() {
+            const metodoPago = document.getElementById('metodo-pago-modal').value;
+            alert(`Pago confirmado por un total de $${total.toLocaleString()} mediante ${metodoPago}`);
+            cerrarModal();
+            carrito = [];
+            total = 0;
+            actualizarCarrito();
+        }
+    </script>
+
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 BAR_BER_GO.</p>
+    </footer>
+    
+</body>
+</html>

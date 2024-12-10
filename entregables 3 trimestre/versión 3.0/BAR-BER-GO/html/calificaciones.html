@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALIFICACION</title>
+    <link rel="stylesheet" href="/css/calificaciones.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>CALIFICA A TUS BARBEROS</h1>
+
+    <div class="barbero">
+        <img src="/imagenes/bar1.jpg" alt="Barbero Juan" class="barbero-img">
+        <h2>Barbero 1: Diego</h2>
+        <div class="rating">
+            <input type="radio" id="juan5" name="juan" value="5">
+            <label for="juan5">★</label>
+            <input type="radio" id="juan4" name="juan" value="4">
+            <label for="juan4">★</label>
+            <input type="radio" id="juan3" name="juan" value="3">
+            <label for="juan3">★</label>
+            <input type="radio" id="juan2" name="juan" value="2">
+            <label for="juan2">★</label>
+            <input type="radio" id="juan1" name="juan" value="1">
+            <label for="juan1">★</label>
+        </div>
+    </div>
+
+    <div class="barbero">
+        <img src="/imagenes/bar2.jpg" alt="Barbero Pedro" class="barbero-img">
+        <h2>Barbero 2: Cristian</h2>
+        <div class="rating">
+            <input type="radio" id="pedro5" name="pedro" value="5">
+            <label for="pedro5">★</label>
+            <input type="radio" id="pedro4" name="pedro" value="4">
+            <label for="pedro4">★</label>
+            <input type="radio" id="pedro3" name="pedro" value="3">
+            <label for="pedro3">★</label>
+            <input type="radio" id="pedro2" name="pedro" value="2">
+            <label for="pedro2">★</label>
+            <input type="radio" id="pedro1" name="pedro" value="1">
+            <label for="pedro1">★</label>
+        </div>
+    </div>
+
+    <center>
+        <button class="submit-button" type="button">Enviar Calificación</button>
+    </center>
+</div>
+<footer class="footer">
+    <p>&copy; 2024 BAR_BER_GO.</p>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const submitButton = document.querySelector('.submit-button');
+
+    submitButton.addEventListener('click', () => {
+        // Aquí podrías hacer alguna validación si es necesario
+        alert('Gracias por tu calificación');
+
+        window.location.href = 'barbero.html'; // Cambia esto por la URL a la que quieras redirigir
+    });
+});
+</script>
+
+</body>
+</html>
+

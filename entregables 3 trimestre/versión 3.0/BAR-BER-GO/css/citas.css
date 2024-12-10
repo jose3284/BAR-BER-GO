@@ -1,0 +1,126 @@
+/* Estilos generales del body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: white;
+}
+
+/* Estilos del encabezado */
+.header {
+    background-color: #dfdfdf;
+    color: black;
+    padding: 10px 20px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-image {
+    height: 50px;
+    width: auto;
+}
+
+.nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.nav-item:hover {
+    text-decoration: underline;
+}
+
+/* Estilos del contenedor principal */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Estilos del formulario de agendamiento */
+.booking-section {
+    padding: 150px; /* Aumenta el padding interno */
+    max-width: 2000px; /* Limita el ancho del formulario a la mitad de la página */
+    margin: 10px 0px; /* Ajusta el margen superior e inferior */
+  background-color: #f6d1c8; /* Color de fondo del contenedor de descripción */
+    border-radius: 8px;
+    border: 1px solid #ffa3a3;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    float: left; /* Alinea el formulario a la izquierda */
+}
+
+
+/* Asegúrate de que el contenedor principal (main) tenga suficiente espacio para el formulario */
+.booking-section h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px; /* Tamaño de fuente para el título */
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.booking-form label {
+    margin: 15px 0 5px; /* Ajusta el margen superior */
+}
+
+.booking-form input,
+.booking-form select {
+    padding: 14px; /* Aumenta el padding para más espacio interno */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 20px; /* Aumenta el margen entre los campos */
+    font-size: 16px; /* Tamaño de fuente para los campos */
+    width: 100%; /* Asegura que los campos ocupen el ancho del formulario */
+}
+
+.booking-form button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 14px 24px; /* Aumenta el padding del botón */
+    border-radius: 5px;
+    font-size: 18px; /* Tamaño de la fuente del botón */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave para el hover */
+}
+
+.booking-form button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilos del contenedor de video */
+.video-section {
+    max-width: 50%;
+    padding: 30px;
+    margin-right: 100px;
+    margin-top: 20px;
+}
+
+
+/* Estilos del pie de página */
+.footer {
+    background-color: #dfdfdf;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}

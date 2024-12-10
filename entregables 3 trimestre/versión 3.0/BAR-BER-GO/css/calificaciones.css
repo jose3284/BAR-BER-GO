@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white ;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 50px auto;
+    background-color: #f6d1c8;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: black;
+}
+
+.barberos-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.barbero {
+    text-align: center;
+}
+
+.barbero h2 {
+    font-size: 20px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.barbero-img {
+    width: 200px;
+    height: 130px;
+    border-radius: 20%;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.rating input[type="radio"] {
+    display: none;
+}
+
+.rating label {
+    font-size: 24px;
+    color: #848484;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.rating input[type="radio"]:checked ~ label,
+.rating input[type="radio"]:checked + label {
+    color: #ffcc00;
+}
+
+.submit-button {
+    background-color: #007bff; /* Verde */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px; /* Bordes redondeados */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.submit-button:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el ratón */
+}
+
+.submit-button:active {
+    background-color: #0056b3; /* Color al hacer clic */
+
+}
+    
+.footer {
+    background-color: #dfdfdf;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }

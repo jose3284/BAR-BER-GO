@@ -1,0 +1,234 @@
+/* Estilos generales */
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white ;
+}
+/* Estilos para el encabezado */
+header.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #dfdfdf;
+  }
+  
+  header.encabezado img {
+    height: 50px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+
+/* Contenedor principal */
+.contenedor {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Estilos del contenedor de items */
+.contenedor-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.item {
+    background: #f6d1c8;
+    border: 2px solid #ffa3a3;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}
+
+.img-item {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #000000;
+}
+
+.titulo-item {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.precio-item {
+    color: #080708;
+    font-size: 1.1em;
+}
+
+.boton-item {
+    background-color: #007bff;
+    color: #000000;
+    border: none;
+    padding: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.boton-item:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos del carrito */
+.carrito {
+
+    
+    background: #f6d1c8;
+    border: 2px solid #ffa3a3;
+    border-radius: 25px;
+    padding: 7px;
+    width: 300px;
+    height: 500px ;
+   
+   
+}
+
+.header-carrito h2 {
+    margin: 0 0 25px;
+}
+
+.carrito-items {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.carrito-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #000000;
+}
+
+.carrito-item-titulo {
+    font-size: 1em;
+}
+
+.carrito-item-precio {
+    color: #000000;
+}
+
+.carrito-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 25px;
+}
+
+.btn-pagar {
+    background-color: #ffb570;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-pagar:hover {
+    background-color: #ffe6bd;
+}
+
+/* Estilos de la ventana modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #afa8a8;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal h2 {
+    margin-top: 0;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    background-color: #333;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.modal-buttons button:hover {
+    background-color: #555;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+
+/* Estilos para el pie de página */
+footer {
+    background-color: #dfdfdf;
+    color: black;
+    padding: 20px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content p {
+    margin: 0;
+}
+
+.social-media {
+    margin-top: 3px;
+}
+
+.social-icon {
+    color: black;
+    margin: 0 5px;
+    text-decoration: none;
+    font-size: 1.5em;
+}
+
+.social-icon:hover {
+    color: black;
+}
