@@ -1,0 +1,167 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif !important;
+    background: linear-gradient(black, #dfdfdf);
+    margin: 0;
+    padding-top: 60px; /* Asegura que haya espacio para el header fijo */
+    height: 100vh; /* Asegura que el body ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Centra el contenido verticalmente */
+    overflow-x: hidden; /* Evita desbordamientos horizontales */
+  }
+  
+  /* Header Styles */
+  header.encabezado {
+    position: fixed; /* Fija el header en la parte superior */
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #efb810;
+    z-index: 1000; /* Asegura que el header esté encima de otros elementos */
+  }
+  
+  header.encabezado img {
+    height: 50px;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  /* Container Styles */
+  .container {
+    max-width: 320px; /* Contenedor más pequeño */
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(#dfdfdf, black);
+    border: 1px solid blanchedalmond;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: left; /* Alinea los elementos dentro del formulario */
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos se apilen verticalmente */
+    position: absolute; /* Esto posiciona el contenedor de forma absoluta */
+    top: 50%; /* Centra el contenedor verticalmente */
+    left: 50%; /* Centra el contenedor horizontalmente */
+    transform: translate(-50%, -50%); /* Ajuste fino para centrarlo perfectamente */
+  }
+  
+  /* Logo Styles */
+  .img-fluid {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+  }
+  
+  /* Form Styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .form-control {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .form-text {
+    font-size: 14px;
+    color: white;
+  }
+  
+  /* Button Styles */
+  #start-button {
+    background-color: #efb810;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%; /* Hace que el botón ocupe todo el ancho disponible */
+    border-radius: 4px;
+    margin-top: 20px; /* Espacio adicional antes del botón */
+  }
+  
+  #start-button:hover {
+    background-color: #efb810;
+  }
+  
+  /* Error Message Styles */
+  .error {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+  }
+  
+  /* Footer Styles */
+  .footer {
+    background-color: #efb810;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    z-index: 1000; /* Asegura que el footer esté encima de otros elementos */
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 20px;
+    }
+    .form-control {
+        font-size: 14px; /* Reducir el tamaño de fuente en pantallas pequeñas */
+    }
+    #start-button {
+        font-size: 14px; /* Reducir el tamaño del botón en pantallas pequeñas */
+    }
+  }
+  /* Enlaces de los botones de registrar y olvidaste tu contraseña */
+  .form-links a {
+    color: white; /* Establece el color de los enlaces en blanco */
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+    font-size: 14px; /* Tamaño de fuente adecuado */
+    display: inline-block;
+    margin-top: 10px;
+  }
+  
+  .form-links a:hover {
+    text-decoration: underline; /* Añade subrayado cuando se pase el mouse sobre el enlace */
+    color: #efb810; /* Color cuando se pase el mouse (puedes cambiar el color si lo prefieres) */
+  }
+  
