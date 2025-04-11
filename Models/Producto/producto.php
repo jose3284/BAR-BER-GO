@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/Database.php';
+
 class Producto
 {
     private $dbh;
@@ -9,6 +11,7 @@ class Producto
     private $producto_name;
     private $cantidad;
     private $precio;
+    private $imagen;
 
 
     
@@ -27,7 +30,7 @@ class Producto
 
 
     // Constructor opcional
-    public function __construct6($id_categoria = null, $categoria = null, $id_producto = null, $producto_name = null, $cantidad = null, $precio = null)
+    public function __construct7($id_categoria = null, $categoria = null, $id_producto = null, $producto_name = null, $cantidad = null, $precio = null,$imagen = null)
     {
         $this->id_categoria = $id_categoria;
         $this->categoria = $categoria;
@@ -35,6 +38,7 @@ class Producto
         $this->producto_name = $producto_name;
         $this->cantidad = $cantidad;
         $this->precio = $precio;
+        $this->imagen = $imagen;
     }
 
     // Getters
@@ -67,6 +71,10 @@ class Producto
     {
         return $this->precio;
     }
+    public function getImagen(){
+
+        return $this->imagen;
+    }
 
     // Setters
     public function setIdCategoria($id_categoria)
@@ -97,6 +105,10 @@ class Producto
     public function setPrecio($precio)
     {
         $this->precio = $precio;
+    }
+    public function setImagen($imagen){
+
+        $this->imagen = $imagen;
     }
 
  # Crear categoria
@@ -168,17 +180,17 @@ class Producto
 
     public function create_producto() {
         try {
-            $sql = 'INSERT INTO  (Nombre, Cantidad, Precio, id_categoria) 
-                    VALUES (:Nombre, :Cantidad, :Precio, :id_categoria)';
+            $sql = 'INSERT INTO productos (Nombre, Cantidad, Precio, id_categoria, imagen) 
+                    VALUES (:Nombre, :Cantidad, :Precio, :id_categoria, :imagen)';
     
             $stmt = $this->dbh->prepare($sql);
     
-            // Ejecutar la consulta con un array de parámetros
             $success = $stmt->execute([
                 ':Nombre' => $this->getProductoName(),
                 ':Cantidad' => $this->getCantidad(),
                 ':Precio' => $this->getPrecio(),
-                ':id_categoria' => $this ->getIdCategoria ()
+                ':id_categoria' => $this->getIdCategoria(),
+                ':imagen' => $this->getImagen()
             ]);
     
             if ($success) {
@@ -187,12 +199,99 @@ class Producto
                 echo "❌ Error al crear Producto.";
             }
         } catch (PDOException $e) {
-            die("❌ Error en createProduct(): " . $e->getMessage());
+            die("❌ Error en create_producto(): " . $e->getMessage());
         }
     }
-    public function read_producto() {}
-    public function getproducto_byid_categoria($id_categoria) {}
-    public function update_producto() {}
-    public function delete_producto() {}
+    
+    public function read_producto() {
+        try {
+            $productoList = [];
+            $sql = 'SELECT * FROM producto';
+            $stmt = $this->dbh->query($sql);
+    
+            foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $producto) {
+                $productoObj = new Producto();
+                $productoObj->setIdProducto($producto['idProducto']);
+                $productoObj->setProductoName($producto['Nombre']);
+                $productoObj->setCantidad($producto['Cantidad']);
+                $productoObj->setPrecio($producto['Precio']);
+                $productoObj->setIdCategoria($producto['id_categoria']);
+    
+                // Si tienes columna imagen:
+                if (isset($producto['imagen'])) {
+                    $productoObj->setImagen($producto['imagen']);
+                }
+    
+                $productoList[] = $productoObj;
+            }
+    
+            return $productoList;
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
+    
+    public function getproducto_byid_categoria($id_categoria) {
+        try {
+            // Aseguramos que el valor sea entero por seguridad
+            $id_categoria = intval($id_categoria);
+    
+            // Consulta preparada para evitar inyecciones SQL
+            $query = "SELECT * FROM productos WHERE id_categoria = :id_categoria";
+            $stmt = $this->dbh->prepare($query);
+            $stmt->bindParam(':id_categoria', $id_categoria, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            // Obtenemos todos los productos como array asociativo
+            $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+            return $productos ?: []; // Devuelve array vacío si no hay resultados
+        } catch (PDOException $e) {
+            // En entorno de desarrollo puedes imprimir el error
+            // En producción es mejor registrarlo y devolver un mensaje genérico
+            return ['error' => 'Error al obtener productos por categoría.'];
+        }
+    }
+    
+    public function update_producto() {
+        try {
+            $sql = 'UPDATE producto SET
+                        idProducto = :idProducto,
+                        Nombre = :Nombre,
+                        Cantidad = :Cantidad,
+                        Precio = :Precio,
+                        imagen = :imagen,
+                        id_categoria = :id_categoria,
+                    WHERE idProducto = :idProducto';
+    
+            $stmt = $this->dbh->prepare($sql);
+    
+            // Asegurar que los nombres de los parámetros coincidan con la base de datos
+            $stmt->bindValue(':idProducto', $this->getIdProducto(), PDO::PARAM_INT);
+            $stmt->bindValue(':Nombre', $this->getProductoName(), PDO::PARAM_STR);
+            $stmt->bindValue(':Cantidad', $this->getCantidad(), PDO::PARAM_INT);
+            $stmt->bindValue(':Precio', $this->getPrecio(), PDO::PARAM_INT);
+            $stmt->bindValue(':imagen', $this->getImagen(), PDO::PARAM_STR);
+            $stmt->bindValue(':id_categoria', $this->getIdCategoria(), PDO::PARAM_INT);
+    
+            if ($stmt->execute()) {
+                echo "✅ Producto actualizado correctamente.";
+            } else {
+                echo "❌ Error al actualizar Producto.";
+            }
+        } catch (Exception $e) {
+            die("❌ Error en update_producto(): " . $e->getMessage());
+        }
+    }
+    public function delete_producto($id_producto) {  
+         try {
+        $sql = 'DELETE FROM producto WHERE idProducto = :IdProducto';
+        $stmt = $this->dbh->prepare($sql);
+        $stmt->bindValue('IdProducto', $id_producto);
+        $stmt->execute();
+    } catch (Exception $e) {
+        die($e->getMessage());
+    }
+}
 
 }

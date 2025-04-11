@@ -14,7 +14,7 @@
 
         <!-- Navegación -->
         <nav class="navegacion">
-            <a href="/BackEnd/Controllers/Productos/catalogo.php">Productos</a>
+            <a href="citas.view.php">barberos</a>
             <a href="logout.php">Cerrar sesión</a>
         </nav>
     </header>
