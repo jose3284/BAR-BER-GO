@@ -1,0 +1,167 @@
+/* Estilo general */
+.Body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #1c1c1c;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+  }
+  
+  /* Encabezado */
+  .encabezado {
+    background-color: #d4af37;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .encabezado img {
+    height: 50px;
+  }
+  
+  .encabezado nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .encabezado nav ul li {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+  }
+  
+  /* Botón cerrar sesión */
+  .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .logout-btn:hover {
+    background-color: #c0392b;
+  }
+  
+  /* Contenido principal */
+  .main-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem 1rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  /* Tarjetas */
+  .card {
+    background-color: #2c2c2c;
+    border-radius: 20px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    color: white;
+  }
+  
+  .card h2 {
+    margin-bottom: 1rem;
+    color: white;
+  }
+  
+  .card video,
+  .card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+  }
+  
+  .card button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .card button:hover {
+    background-color: #27ae60;
+  }
+  
+  /* Secciones informativas */
+  .info-section {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .info-section h2 {
+    margin-bottom: 2rem;
+    color: #d4af37;
+  }
+  
+  .info-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1rem;
+  }
+  
+  .info-card {
+    background-color: #2c2c2c;
+    border-radius: 15px;
+    padding: 1rem;
+    width: 220px;
+    color: white;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .info-card img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+  }
+  
+  /* Mapa */
+  .map-section {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .map-section h2 {
+    color: #d4af37;
+    margin-bottom: 1rem;
+  }
+  
+  .map-section iframe {
+    width: 90%;
+    max-width: 800px;
+    height: 300px;
+    border: none;
+    border-radius: 10px;
+  }
+  
+  /* Pie de página */
+  .footer {
+    background-color: #d4af37;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  

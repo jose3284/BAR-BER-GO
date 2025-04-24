@@ -1,0 +1,110 @@
+/* Contenedor principal del body */
+.body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #1f1f1f;
+    color: white;
+  }
+  
+  /* === ENCABEZADO === */
+  .encabezado {
+    background-color: gold;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .encabezado img {
+    height: 50px;
+  }
+  
+  .encabezado nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .encabezado nav ul li h3 {
+    margin: 0;
+    color: black;
+  }
+  
+  .encabezado nav ul li a {
+    text-decoration: none;
+  }
+  
+  /* === FORMULARIO DE AUTENTICACIÓN === */
+  .auth-form {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 2rem;
+    background-color: #1e1e1e;
+    border-radius: 10px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .auth-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .auth-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  /* Botón */
+  .auth-form button {
+    width: 100%;
+    background-color: gold;
+    color: black;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+  }
+  
+  .auth-form button:hover {
+    background-color: #e6c200;
+  }
+  
+  /* Mensajes */
+  .auth-error {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .auth-link {
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .auth-link a {
+    color: gold;
+    text-decoration: underline;
+  }
+  
+  /* === PIE DE PÁGINA === */
+  .footer {
+    background-color: gold;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    color: black;
+  }
+  

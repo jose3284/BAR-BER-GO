@@ -1,0 +1,33 @@
+# Laravel
+/vendor
+/node_modules
+.env
+.phpunit.result.cache
+/storage/*.key
+/storage/app/public
+/storage/debugbar
+/storage/framework/cache/data
+/storage/framework/sessions
+/storage/framework/views
+/storage/logs
+/public/storage
+
+# React Native y Expo
+**/node_modules
+**/android
+**/ios
+*.log
+.expo
+.expo-shared
+web-build
+*.keystore
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.xc*
+
+# OS
+.DS_Store
+Thumbs.db
