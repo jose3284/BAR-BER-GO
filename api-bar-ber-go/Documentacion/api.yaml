@@ -1,0 +1,777 @@
+openapi: 3.0.0
+info:
+  title: API BAR-BER-GO
+  description: Documentación de la API para la aplicación BAR-BER-GO.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000/api
+    description: Servidor local de desarrollo
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas: {}
+
+paths:
+  /cita:
+    get:
+      summary: Obtener todas las citas
+      tags:
+        - Citas
+      responses:
+        '200':
+          description: Lista de citas obtenida correctamente
+
+    post:
+      summary: Crear una nueva cita
+      tags:
+        - Citas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  format: date
+                hora:
+                  type: string
+                usuario_id:
+                  type: integer
+                barbero_id:
+                  type: integer
+              required:
+                - fecha
+                - hora
+                - usuario_id
+                - barbero_id
+      responses:
+        '201':
+          description: Cita creada exitosamente
+
+  /cita/{id}:
+    get:
+      summary: Obtener una cita por ID
+      tags:
+        - Citas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cita obtenida correctamente
+
+    put:
+      summary: Actualizar una cita por ID
+      tags:
+        - Citas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                fecha:
+                  type: string
+                  format: date
+                hora:
+                  type: string
+                usuario_id:
+                  type: integer
+                barbero_id:
+                  type: integer
+      responses:
+        '200':
+          description: Cita actualizada correctamente
+
+    delete:
+      summary: Eliminar una cita por ID
+      tags:
+        - Citas
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Cita eliminada exitosamente
+  /usuarios:
+    get:
+      summary: Obtener todos los usuarios
+      tags:
+        - Usuarios
+      responses:
+        '200':
+          description: Lista de usuarios obtenida correctamente
+
+    post:
+      summary: Crear un nuevo usuario
+      tags:
+        - Usuarios
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                rol_id:
+                  type: integer
+              required:
+                - nombre
+                - email
+                - password
+                - rol_id
+      responses:
+        '201':
+          description: Usuario creado exitosamente
+
+  /usuarios/{id}:
+    get:
+      summary: Obtener un usuario por ID
+      tags:
+        - Usuarios
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario obtenido correctamente
+
+    put:
+      summary: Actualizar un usuario por ID
+      tags:
+        - Usuarios
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                rol_id:
+                  type: integer
+      responses:
+        '200':
+          description: Usuario actualizado correctamente
+
+    delete:
+      summary: Eliminar un usuario por ID
+      tags:
+        - Usuarios
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuario eliminado exitosamente
+  /producto:
+    get:
+      summary: Obtener todos los productos
+      tags:
+        - Productos
+      responses:
+        '200':
+          description: Lista de productos obtenida correctamente
+
+    post:
+      summary: Crear un nuevo producto
+      tags:
+        - Productos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                descripcion:
+                  type: string
+                precio:
+                  type: number
+                  format: float
+                categoria_id:
+                  type: integer
+              required:
+                - nombre
+                - descripcion
+                - precio
+                - categoria_id
+      responses:
+        '201':
+          description: Producto creado exitosamente
+
+  /producto/{id}:
+    get:
+      summary: Obtener un producto por ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Producto obtenido correctamente
+
+    put:
+      summary: Actualizar un producto por ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                descripcion:
+                  type: string
+                precio:
+                  type: number
+                  format: float
+                categoria_id:
+                  type: integer
+      responses:
+        '200':
+          description: Producto actualizado correctamente
+
+    delete:
+      summary: Eliminar un producto por ID
+      tags:
+        - Productos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Producto eliminado exitosamente
+  /roles:
+    get:
+      summary: Obtener todos los roles
+      tags:
+        - Roles
+      responses:
+        '200':
+          description: Lista de roles obtenida correctamente
+
+    post:
+      summary: Crear un nuevo rol
+      tags:
+        - Roles
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+              required:
+                - nombre
+      responses:
+        '201':
+          description: Rol creado exitosamente
+
+  /roles/{id}:
+    get:
+      summary: Obtener un rol por ID
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Rol obtenido correctamente
+
+    put:
+      summary: Actualizar un rol por ID
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        '200':
+          description: Rol actualizado correctamente
+
+    delete:
+      summary: Eliminar un rol por ID
+      tags:
+        - Roles
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Rol eliminado exitosamente
+  /categorias:
+    get:
+      summary: Obtener todas las categorías
+      tags:
+        - Categorías
+      responses:
+        '200':
+          description: Lista de categorías obtenida correctamente
+
+    post:
+      summary: Crear una nueva categoría
+      tags:
+        - Categorías
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+              required:
+                - nombre
+      responses:
+        '201':
+          description: Categoría creada exitosamente
+
+  /categorias/{id}:
+    get:
+      summary: Obtener una categoría por ID
+      tags:
+        - Categorías
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Categoría obtenida correctamente
+
+    put:
+      summary: Actualizar una categoría por ID
+      tags:
+        - Categorías
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+      responses:
+        '200':
+          description: Categoría actualizada correctamente
+
+    delete:
+      summary: Eliminar una categoría por ID
+      tags:
+        - Categorías
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Categoría eliminada exitosamente
+  /metodo-pago:
+    get:
+      summary: Obtener todos los métodos de pago
+      tags:
+        - Métodos de Pago
+      responses:
+        '200':
+          description: Lista de métodos de pago obtenida correctamente
+
+    post:
+      summary: Crear un nuevo método de pago
+      tags:
+        - Métodos de Pago
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tipo:
+                  type: string
+              required:
+                - tipo
+      responses:
+        '201':
+          description: Método de pago creado exitosamente
+
+  /metodo-pago/{id}:
+    get:
+      summary: Obtener un método de pago por ID
+      tags:
+        - Métodos de Pago
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Método de pago obtenido correctamente
+
+    put:
+      summary: Actualizar un método de pago por ID
+      tags:
+        - Métodos de Pago
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tipo:
+                  type: string
+      responses:
+        '200':
+          description: Método de pago actualizado correctamente
+
+    delete:
+      summary: Eliminar un método de pago por ID
+      tags:
+        - Métodos de Pago
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Método de pago eliminado exitosamente
+  /recibos:
+    get:
+      summary: Obtener todos los recibos
+      tags:
+        - Recibos
+      responses:
+        '200':
+          description: Lista de recibos obtenida correctamente
+
+    post:
+      summary: Crear un nuevo recibo
+      tags:
+        - Recibos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                total:
+                  type: number
+                metodo_pago_id:
+                  type: integer
+                usuario_id:
+                  type: integer
+              required:
+                - total
+                - metodo_pago_id
+                - usuario_id
+      responses:
+        '201':
+          description: Recibo creado exitosamente
+
+  /recibos/{id}:
+    get:
+      summary: Obtener un recibo por ID
+      tags:
+        - Recibos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Recibo obtenido correctamente
+
+    put:
+      summary: Actualizar un recibo por ID
+      tags:
+        - Recibos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                total:
+                  type: number
+                metodo_pago_id:
+                  type: integer
+                usuario_id:
+                  type: integer
+      responses:
+        '200':
+          description: Recibo actualizado correctamente
+
+    delete:
+      summary: Eliminar un recibo por ID
+      tags:
+        - Recibos
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Recibo eliminado exitosamente
+  /login:
+    post:
+      summary: Iniciar sesión
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: Usuario autenticado correctamente
+
+  /logout:
+    post:
+      summary: Cerrar sesión
+      tags:
+        - Autenticación
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Sesión cerrada exitosamente
+
+  /forgot-password:
+    post:
+      summary: Enviar enlace de recuperación de contraseña
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+              required:
+                - email
+      responses:
+        '200':
+          description: Correo de recuperación enviado
+
+  /reset-password:
+    post:
+      summary: Cambiar contraseña usando token
+      tags:
+        - Autenticación
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                password_confirmation:
+                  type: string
+              required:
+                - token
+                - email
+                - password
+                - password_confirmation
+      responses:
+        '200':
+          description: Contraseña restablecida correctamente
+  /productos/estadisticas:
+    get:
+      summary: Obtener estadísticas de productos
+      tags:
+        - Estadísticas
+      responses:
+        '200':
+          description: Estadísticas generadas correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  total: 50
+                  vendidos: 30
+                  disponibles: 20
+
+  /productos/estadisticas/pdf:
+    get:
+      summary: Generar PDF con estadísticas de productos
+      tags:
+        - Estadísticas
+      responses:
+        '200':
+          description: PDF generado exitosamente
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+  /cita/estadisticas:
+    get:
+      summary: Obtener estadísticas de citas
+      tags:
+        - Estadísticas
+      responses:
+        '200':
+          description: Estadísticas de citas generadas correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  total: 100
+                  completadas: 80
+                  canceladas: 20
+
+  /cita/estadisticas/pdf:
+    get:
+      summary: Generar PDF con estadísticas de citas
+      tags:
+        - Estadísticas
+      responses:
+        '200':
+          description: PDF generado exitosamente
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
