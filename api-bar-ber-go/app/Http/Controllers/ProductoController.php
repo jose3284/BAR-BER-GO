@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\Pdf;
+use App\Services\ProductoService;
+use App\Services\Reportes\ReportePDFService;
 
 class ProductoController extends Controller
 {
-    // GET /api/productos
-    public function ProductoIndex()
+    protected $productoService;
+    protected $pdfService;
+
+    public function __construct(ProductoService $productoService, ReportePDFService $pdfService)
     {
-        $productos = Producto::all();
-        return response()->json($productos);
+        $this->productoService = $productoService;
+        $this->pdfService = $pdfService;
     }
 
-    // GET /api/productos/{id}
-    public function ProductoShow($id)
+    public function index()
     {
-        $producto = Producto::find($id);
+        return response()->json($this->productoService->getAll());
+    }
+
+    public function show($id)
+    {
+        $producto = $this->productoService->find($id);
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
@@ -27,10 +33,9 @@ class ProductoController extends Controller
         return response()->json($producto);
     }
 
-    // POST /api/productos
-    public function ProductoStore(Request $request)
+    public function store(Request $request)
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'Nombre' => 'required|string|max:255',
             'Cantidad' => 'required|integer',
             'Precio' => 'required|numeric',
@@ -38,21 +43,14 @@ class ProductoController extends Controller
             'id_categoria' => 'required|integer'
         ]);
 
-        $producto = Producto::create($validated);
+        $producto = $this->productoService->create($data);
 
         return response()->json($producto, 201);
     }
 
-    // PUT /api/productos/{id}
-    public function ProductoUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $producto = Producto::find($id);
-
-        if (!$producto) {
-            return response()->json(['message' => 'Producto no encontrado'], 404);
-        }
-
-        $validated = $request->validate([
+        $data = $request->validate([
             'Nombre' => 'sometimes|required|string|max:255',
             'Cantidad' => 'sometimes|required|integer',
             'Precio' => 'sometimes|required|numeric',
@@ -60,54 +58,34 @@ class ProductoController extends Controller
             'id_categoria' => 'sometimes|required|integer'
         ]);
 
-        $producto->update($validated);
-
-        return response()->json($producto);
-    }
-
-    // DELETE /api/productos/{id}
-    public function ProductoDestroy($id)
-    {
-        $producto = Producto::find($id);
+        $producto = $this->productoService->update($id, $data);
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
         }
 
-        $producto->delete();
+        return response()->json($producto);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = $this->productoService->delete($id);
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
 
         return response()->json(['message' => 'Producto eliminado correctamente']);
     }
 
     public function estadisticas()
-{
-    $productos = \App\Models\Producto::all();
+    {
+        return response()->json($this->productoService->getEstadisticas());
+    }
 
-    $total = $productos->count();
-    $promedioPrecio = $productos->avg('Precio');
-    $maxPrecio = $productos->max('Precio');
-    $minPrecio = $productos->min('Precio');
-
-    return response()->json([
-        'total_productos' => $total,
-        'precio_promedio' => $promedioPrecio,
-        'precio_maximo' => $maxPrecio,
-        'precio_minimo' => $minPrecio,
-    ]);
-}
-
-public function generarPDF()
-{
-    $productos = \App\Models\Producto::all();
-
-    $data = [
-        'productos' => $productos,
-        'total' => $productos->count(),
-        'fecha' => now()->toDateTimeString()
-    ];
-
-    $pdf = Pdf::loadView('pdf.reporte_productos', $data);
-
-    return $pdf->download('reporte_productos.pdf');
-}
+    public function generarPDF()
+    {
+        $data = $this->productoService->getPDFData();
+        return $this->pdfService->generar('pdf.reporte_productos', $data, 'reporte_productos.pdf');
+    }
 }

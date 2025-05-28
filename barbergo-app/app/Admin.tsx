@@ -42,17 +42,17 @@ const Admin = () => {
 
   useEffect(() => {
     axios
-      .get('http://192.168.1.7:8000/api/productos/estadisticas')
+      .get('http://192.168.20.207:8000/api/productos/estadisticas')
       .then((res) => setStats(res.data))
       .catch((err) => console.error(err));
 
     axios
-      .get('http://192.168.1.7:8000/api/cita/estadisticas')
+      .get('http://192.168.20.207:8000/api/cita/estadisticas')
       .then((res) => setCitaStats(res.data))
       .catch((err) => console.error(err));
 
     axios
-      .get('http://192.168.1.7:8000/api/recibos/estadisticas')
+      .get('http://192.168.20.207:8000/api/recibos/estadisticas')
       .then((res) => setReciboStats(res.data))
       .catch((err) => console.error(err));
   }, []);
@@ -69,7 +69,7 @@ const Admin = () => {
 
   const downloadPDF = async (endpoint: string, filename: string) => {
     try {
-      await axios.get(`http://192.168.1.7:8000/api/${endpoint}`, {
+      await axios.get(`http://192.168.20.207:8000/api/${endpoint}`, {
         responseType: 'blob',
       });
       Alert.alert('Descarga', `Se descargó ${filename} correctamente.`);

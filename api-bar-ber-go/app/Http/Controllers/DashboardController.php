@@ -4,47 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\Services\RoleDataService;
+use App\Services\RoleService;
 
 class DashboardController extends Controller
 {
-    public function index()
+    protected $dataService;
+    protected $roleService;
+
+    public function __construct(RoleDataService $dataService, RoleService $roleService)
+    {
+        $this->dataService = $dataService;
+        $this->roleService = $roleService;
+    }
+
+    public function index(Request $request)
     {
         $user = Session::get('user');
 
         if (!$user) {
-            return redirect()->route('login');
+            return response()->json(['error' => 'No autenticado'], 401);
         }
 
-        $rol_id = $user['id_roles'];
+        $role = $this->roleService->mapRoleIdToName($user['id_roles']);
+        $data = $this->dataService->getDataForRole($role);
 
-        // Mapeo de roles
-        $rolesMap = [
-            1 => 'admin',
-            2 => 'barbero',
-            3 => 'vendedor',
-            4 => 'cliente',
-        ];
-
-        $rol = $rolesMap[$rol_id] ?? 'cliente';
-
-        // 👇 Datos opcionales para el rol barbero
-        $citas = [];
-        if ($rol === 'barbero') {
-            $citas = app(\App\Http\Controllers\CitaController::class)->index()->getData();
-            }
-
-        // Validación de vistas
-        if (
-            view()->exists("roles.$rol.header") &&
-            view()->exists("roles.$rol.$rol") &&
-            view()->exists("roles.$rol.footer")
-        ) {
-            return view('dashboard', [
-                'rol' => $rol,
-                'citas' => $citas
-            ]);
-        } else {
-            return response("⚠️ No se encontraron las vistas para el rol '$rol'.");
-        }
+        return response()->json([
+            'user' => $user,
+            'role' => $role,
+            'data' => $data,
+        ]);
     }
 }

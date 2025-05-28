@@ -19,7 +19,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('http://192.168.1.7:8000/api/login', {
+      const response = await axios.post('http://192.168.20.207:8000/api/login', {
         Correo: email,
         Pass: password,
       });
@@ -30,7 +30,6 @@ export default function LoginScreen() {
       // Guardar token en almacenamiento si lo necesitas más tarde
       // await AsyncStorage.setItem('token', token);
 
-      
       switch (rol) {
         case 1:
           router.push('/Admin');
@@ -47,7 +46,7 @@ export default function LoginScreen() {
         default:
           router.push('/dashboard');
       }
-      
+
     } catch (error: unknown) {
       if (
         typeof error === 'object' &&

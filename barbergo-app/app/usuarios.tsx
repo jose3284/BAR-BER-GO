@@ -5,10 +5,8 @@ import {
   TextInput,
   Button,
   FlatList,
-  TouchableOpacity,
-  Alert,
-  StyleSheet,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import axios from 'axios';
 
@@ -38,7 +36,7 @@ const Usuarios = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const res = await axios.get('http://192.168.1.7:8000/api/usuarios');
+      const res = await axios.get('http://192.168.20.207:8000/api/usuarios');
       setUsuarios(res.data);
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -60,13 +58,21 @@ const Usuarios = () => {
   const handleSubmit = async () => {
     try {
       if (editId) {
-        await axios.put(`http://192.168.1.7:8000/api/usuarios/${editId}`, formData);
+        await axios.put(`http://192.168.20.207:8000/api/usuarios/${editId}`, formData);
         setEditId(null);
       } else {
-        await axios.post('http://192.168.1.7:8000/api/usuarios', formData);
+        await axios.post('http://192.168.20.207:8000/api/usuarios', formData);
       }
       fetchUsuarios();
-      setFormData({ Nombre: '', P_apellido: '', S_apellido: '', Pass: '', Correo: '', id_roles: 0, userState: true });
+      setFormData({
+        Nombre: '',
+        P_apellido: '',
+        S_apellido: '',
+        Pass: '',
+        Correo: '',
+        id_roles: 0,
+        userState: true,
+      });
     } catch (err) {
       if (axios.isAxiosError(err)) {
         console.error('Error al guardar usuario:', err.response?.data || err.message);
@@ -91,7 +97,7 @@ const Usuarios = () => {
 
   const handleDelete = async (id: number) => {
     try {
-      const res = await axios.delete(`http://192.168.1.7:8000/api/usuarios/${id}`);
+      const res = await axios.delete(`http://192.168.20.207:8000/api/usuarios/${id}`);
       console.log(res.data);
       fetchUsuarios();
     } catch (err) {

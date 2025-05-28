@@ -9,7 +9,8 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\MetodoPagoController;
 use App\Http\Controllers\ReciboController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 
 // Rutas para las citas
@@ -18,6 +19,8 @@ Route::get('/cita/{id}', [CitaController::class, 'show']);
 Route::post('/cita', [CitaController::class, 'store']);
 Route::put('/cita/{id}', [CitaController::class, 'update']);
 Route::delete('/cita/{id}', [CitaController::class, 'destroy']);
+Route::get('/cita/estadisticas', [CitaController::class, 'estadisticas']);
+Route::get('/cita/estadisticas/pdf', [CitaController::class, 'generarPDF']);
 
 // Rutas para los usuarios
 
@@ -28,12 +31,13 @@ Route::put('/usuarios/{id}', [UsersController::class, 'UserUpdate']);
 Route::delete('/usuarios/{id}', [UsersController::class, 'UserDestroy']);
 
 // Rutas para los productos
-Route::get('/producto', [ProductoController::class, 'ProductoIndex']);
-Route::get('/producto/{id}', [ProductoController::class, 'ProductoShow']);
-Route::post('/producto', [ProductoController::class, 'ProductoStore']);
-Route::put('/producto/{id}', [ProductoController::class, 'ProductoUpdate']);
-Route::delete('/producto/{id}', [ProductoController::class, 'ProductoDestroy']);
-
+ Route::get('/producto', [ProductoController::class, 'index']);
+    Route::get('/producto/{id}', [ProductoController::class, 'show']);
+    Route::post('/producto', [ProductoController::class, 'store']);
+    Route::put('/producto/{id}', [ProductoController::class, 'update']);
+    Route::delete('/producto/{id}', [ProductoController::class, 'destroy']);
+    Route::get('/producto/estadisticas', [ProductoController::class, 'estadisticas']);
+    Route::get('/producto/reporte/pdf', [ProductoController::class, 'generarPDF']);
 // Rutas para los Roles 
 
 Route::get('/roles', [RolController::class, 'RolIndex']);
@@ -65,21 +69,13 @@ Route::get('/recibos/{id}', [ReciboController::class, 'show']);
 Route::post('/recibos', [ReciboController::class, 'store']);
 Route::put('/recibos/{id}', [ReciboController::class, 'update']);
 Route::delete('/recibos/{id}', [ReciboController::class, 'destroy']);
-
-// Login y Logout
-
-Route::post('/login', [AuthController::class, 'login']);
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
-Route::get('/productos/estadisticas', [ProductoController::class, 'estadisticas']);
-Route::get('/productos/estadisticas/pdf', [ProductoController::class, 'generarPDF']);
-
-Route::get('/cita/estadisticas', [CitaController::class, 'estadisticas']);
-Route::get('/cita/estadisticas/pdf', [CitaController::class, 'generarPDF']);
-
-// Ruta para obtener estadísticas de recibos
 Route::get('/recibos/estadisticas', [ReciboController::class, 'estadisticas']);
-
-// Ruta para generar el PDF de estadísticas de recibos
 Route::get('/recibos/pdf', [ReciboController::class, 'generarPDF']);
+
+// Autenticación
+Route::post('/login', [LoginController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
+
+// Recuperación de contraseña
+Route::post('/forgot-password', [PasswordResetController::class, 'forgotPassword']);
+Route::post('/reset-password', [PasswordResetController::class, 'resetPassword']);

@@ -3,21 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\MetodoPago;
+use App\Services\MetodoPagoService;
 
 class MetodoPagoController extends Controller
 {
-    // GET /api/metodo-pago
-    public function index()
+    protected $metodoPagoService;
+
+    public function __construct(MetodoPagoService $metodoPagoService)
     {
-        $metodos = MetodoPago::all();
-        return response()->json($metodos);
+        $this->metodoPagoService = $metodoPagoService;
     }
 
-    // GET /api/metodo-pago/{id}
+    public function index()
+    {
+        return response()->json($this->metodoPagoService->getAll());
+    }
+
     public function show($id)
     {
-        $metodo = MetodoPago::find($id);
+        $metodo = $this->metodoPagoService->find($id);
 
         if (!$metodo) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
@@ -26,46 +30,39 @@ class MetodoPagoController extends Controller
         return response()->json($metodo);
     }
 
-    // POST /api/metodo-pago
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $data = $request->validate([
             'Metodo_pago' => 'required|string|max:255',
         ]);
 
-        $metodo = MetodoPago::create($validated);
+        $metodo = $this->metodoPagoService->create($data);
 
         return response()->json($metodo, 201);
     }
 
-    // PUT /api/metodo-pago/{id}
     public function update(Request $request, $id)
     {
-        $metodo = MetodoPago::find($id);
+        $data = $request->validate([
+            'Metodo_pago' => 'required|string|max:255',
+        ]);
+
+        $metodo = $this->metodoPagoService->update($id, $data);
 
         if (!$metodo) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
         }
-
-        $validated = $request->validate([
-            'Metodo_pago' => 'required|string|max:255',
-        ]);
-
-        $metodo->update($validated);
 
         return response()->json($metodo);
     }
 
-    // DELETE /api/metodo-pago/{id}
     public function destroy($id)
     {
-        $metodo = MetodoPago::find($id);
+        $deleted = $this->metodoPagoService->delete($id);
 
-        if (!$metodo) {
+        if (!$deleted) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
         }
-
-        $metodo->delete();
 
         return response()->json(['message' => 'Método de pago eliminado correctamente']);
     }

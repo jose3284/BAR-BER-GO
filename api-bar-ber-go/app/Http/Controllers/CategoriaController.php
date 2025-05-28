@@ -3,70 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Http\Requests\StoreCategoriaRequest;
+use App\Http\Requests\UpdateCategoriaRequest;
 
 class CategoriaController extends Controller
 {
     // GET /api/categorias
-    public function index()
+    public function index(): JsonResponse
     {
-        $categorias = Categoria::all();
-        return response()->json($categorias);
+        return response()->json(Categoria::all());
     }
 
-    // GET /api/categorias/{id}
-    public function show($id)
+    // GET /api/categorias/{categoria}
+    public function show(Categoria $categoria): JsonResponse
     {
-        $categoria = Categoria::find($id);
-
-        if (!$categoria) {
-            return response()->json(['message' => 'Categoría no encontrada'], 404);
-        }
-
         return response()->json($categoria);
     }
 
     // POST /api/categorias
-    public function store(Request $request)
+    public function store(StoreCategoriaRequest $request): JsonResponse
     {
-        $validated = $request->validate([
-            'categoria' => 'required|string|max:255',
-        ]);
-
-        $categoria = Categoria::create($validated);
-
+        $categoria = Categoria::create($request->validated());
         return response()->json($categoria, 201);
     }
 
-    // PUT /api/categorias/{id}
-    public function update(Request $request, $id)
+    // PUT /api/categorias/{categoria}
+    public function update(UpdateCategoriaRequest $request, Categoria $categoria): JsonResponse
     {
-        $categoria = Categoria::find($id);
-
-        if (!$categoria) {
-            return response()->json(['message' => 'Categoría no encontrada'], 404);
-        }
-
-        $validated = $request->validate([
-            'categoria' => 'required|string|max:255',
-        ]);
-
-        $categoria->update($validated);
-
+        $categoria->update($request->validated());
         return response()->json($categoria);
     }
 
-    // DELETE /api/categorias/{id}
-    public function destroy($id)
+    // DELETE /api/categorias/{categoria}
+    public function destroy(Categoria $categoria): JsonResponse
     {
-        $categoria = Categoria::find($id);
-
-        if (!$categoria) {
-            return response()->json(['message' => 'Categoría no encontrada'], 404);
-        }
-
         $categoria->delete();
-
         return response()->json(['message' => 'Categoría eliminada correctamente']);
     }
 }
