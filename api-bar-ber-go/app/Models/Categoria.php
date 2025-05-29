@@ -11,7 +11,8 @@ class Categoria extends Model
 
     protected $table = 'categoria';
     protected $primaryKey = 'id_categoria';
-    public $timestamps = false;
+    public $incrementing= true;
+    public $keyType = 'int';
 
     protected $fillable = [
         'categoria'

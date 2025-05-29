@@ -2,22 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rol;
 use Illuminate\Http\Request;
+use App\Services\Roles\RolService;
 
 class RolController extends Controller
 {
-    // GET /api/roles
-    public function RolIndex()
+    protected $rolService;
+
+    public function __construct(RolService $rolService)
     {
-        $roles = Rol::all();
-        return response()->json($roles);
+        $this->rolService = $rolService;
     }
 
-    // GET /api/roles/{id}
-    public function RolShow($id)
+    public function index()
     {
-        $rol = Rol::find($id);
+        return response()->json($this->rolService->getAll());
+    }
+
+    public function show($id)
+    {
+        $rol = $this->rolService->find($id);
 
         if (!$rol) {
             return response()->json(['message' => 'Rol no encontrado'], 404);
@@ -26,48 +30,40 @@ class RolController extends Controller
         return response()->json($rol);
     }
 
-    // POST /api/roles
-    public function RolStore(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
             'nombre_rol' => 'required|string|max:255',
         ]);
 
-        $rol = Rol::create($validated);
+        $rol = $this->rolService->create($validated);
 
         return response()->json($rol, 201);
     }
 
-    // PUT /api/roles/{id}
-    public function RolUpdate(Request $request, $id)
+    public function update(Request $request, $id)
     {
-        $rol = Rol::find($id);
-
-        if (!$rol) {
-            return response()->json(['message' => 'Rol no encontrado'], 404);
-        }
-
         $validated = $request->validate([
             'nombre_rol' => 'required|string|max:255',
         ]);
 
-        $rol->update($validated);
-
-        return response()->json($rol);
-    }
-
-    // DELETE /api/roles/{id}
-    public function RolDestroy($id)
-    {
-        $rol = Rol::find($id);
+        $rol = $this->rolService->update($id, $validated);
 
         if (!$rol) {
             return response()->json(['message' => 'Rol no encontrado'], 404);
         }
 
-        $rol->delete();
+        return response()->json($rol);
+    }
+
+    public function destroy($id)
+    {
+        $deleted = $this->rolService->delete($id);
+
+        if (!$deleted) {
+            return response()->json(['message' => 'Rol no encontrado'], 404);
+        }
 
         return response()->json(['message' => 'Rol eliminado correctamente']);
     }
 }
-

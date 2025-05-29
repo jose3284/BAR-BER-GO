@@ -6,9 +6,9 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class ReportePDFService
 {
-    public function generar(string $view, array $data, string $filename)
+    public function generar(string $vista, array $data, string $nombreArchivo)
     {
-        $pdf = Pdf::loadView($view, $data);
-        return $pdf->download($filename);
+        $pdf = Pdf::loadView($vista, $data);
+        return $pdf->download($nombreArchivo);
     }
 }

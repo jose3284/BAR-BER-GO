@@ -3,23 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Services\ReciboService;
+use App\Services\Reportes\EstadisticasService;
+use App\Services\Reportes\ReciboPDFService;
 use App\Models\Recibo;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Illuminate\Support\Facades\DB;
 
 class ReciboController extends Controller
 {
-    // GET /api/recibos
+    public function __construct(
+        protected ReciboService $reciboService,
+        protected EstadisticasService $estadisticasService,
+        protected ReciboPDFService $pdfService
+    ) {}
+
     public function index()
     {
-        $recibos = Recibo::with(['producto', 'metodoPago', 'usuario'])->get();
-        return response()->json($recibos);
+        return response()->json($this->reciboService->obtenerTodos());
     }
 
-    // GET /api/recibos/{id}
     public function show($id)
     {
-        $recibo = Recibo::with(['producto', 'metodoPago', 'usuario'])->find($id);
+        $recibo = $this->reciboService->obtenerPorId($id);
 
         if (!$recibo) {
             return response()->json(['message' => 'Recibo no encontrado'], 404);
@@ -28,7 +32,6 @@ class ReciboController extends Controller
         return response()->json($recibo);
     }
 
-    // POST /api/recibos
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -40,12 +43,11 @@ class ReciboController extends Controller
             'Usuarios_idUsuario' => 'required|integer|exists:usuarios,idUsuario',
         ]);
 
-        $recibo = Recibo::create($validated);
+        $recibo = $this->reciboService->crear($validated);
 
         return response()->json($recibo, 201);
     }
 
-    // PUT /api/recibos/{id}
     public function update(Request $request, $id)
     {
         $recibo = Recibo::find($id);
@@ -63,12 +65,11 @@ class ReciboController extends Controller
             'Usuarios_idUsuario' => 'sometimes|required|integer|exists:usuarios,idUsuario',
         ]);
 
-        $recibo->update($validated);
+        $reciboActualizado = $this->reciboService->actualizar($recibo, $validated);
 
-        return response()->json($recibo);
+        return response()->json($reciboActualizado);
     }
 
-    // DELETE /api/recibos/{id}
     public function destroy($id)
     {
         $recibo = Recibo::find($id);
@@ -77,37 +78,19 @@ class ReciboController extends Controller
             return response()->json(['message' => 'Recibo no encontrado'], 404);
         }
 
-        $recibo->delete();
+        $this->reciboService->eliminar($recibo);
 
         return response()->json(['message' => 'Recibo eliminado correctamente']);
     }
 
-    // GET /api/recibos/estadisticas
     public function estadisticas()
     {
-        $estadisticas = [
-            'total_recibos' => Recibo::count(),
-            'monto_total' => Recibo::sum('Total'),
-            'monto_promedio' => Recibo::average('Total'),
-            'monto_maximo' => Recibo::max('Total'),
-            'monto_minimo' => Recibo::min('Total'),
-        ];
-
-        return response()->json($estadisticas);
+        return response()->json($this->estadisticasService->obtenerEstadisticas());
     }
 
-    // GET /api/recibos/pdf
     public function generarPDF()
     {
-        $estadisticas = [
-            'total_recibos' => Recibo::count(),
-            'monto_total' => Recibo::sum('Total'),
-            'monto_promedio' => Recibo::average('Total'),
-            'monto_maximo' => Recibo::max('Total'),
-            'monto_minimo' => Recibo::min('Total'),
-        ];
-
-        $pdf = Pdf::loadView('pdf.recibos', compact('estadisticas'));
+        $pdf = $this->pdfService->generarPDF();
         return $pdf->download('reporte_estadisticas_recibos.pdf');
     }
 }

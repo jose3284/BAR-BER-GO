@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\MetodoPago;
 
 use App\Models\MetodoPago;
 
 class MetodoPagoService
 {
-    public function getAll()
+    public function obtenerTodos()
     {
         return MetodoPago::all();
     }
 
-    public function find($id)
+    public function obtenerPorId($id)
     {
         return MetodoPago::find($id);
     }
 
-    public function create(array $data)
+    public function crear(array $data)
     {
         return MetodoPago::create($data);
     }
 
-    public function update($id, array $data)
+    public function actualizar($id, array $data)
     {
         $metodo = MetodoPago::find($id);
 
@@ -30,11 +30,10 @@ class MetodoPagoService
         }
 
         $metodo->update($data);
-
         return $metodo;
     }
 
-    public function delete($id)
+    public function eliminar($id)
     {
         $metodo = MetodoPago::find($id);
 
@@ -42,6 +41,7 @@ class MetodoPagoService
             return false;
         }
 
-        return $metodo->delete();
+        $metodo->delete();
+        return true;
     }
 }

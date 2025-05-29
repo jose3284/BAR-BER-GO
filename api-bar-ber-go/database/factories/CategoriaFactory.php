@@ -2,16 +2,17 @@
 
 namespace Database\Factories;
 
+use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CategoriaFactory extends Factory
 {
-    protected $model = \App\Models\Categoria::class;
+    protected $model = Categoria::class;
 
     public function definition(): array
     {
         return [
-            'categoria' => $this->faker->word,
+            'categoria' => $this->faker->word(), // por ejemplo: "bebidas", "cortes", etc.
         ];
     }
 }

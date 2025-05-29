@@ -3,16 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class cita extends Model
+class Cita extends Model
 {
+    use HasFactory;
 
-    protected $table = 'cita'; // tabla utilizada en la api
+    protected $table = 'cita';
 
-    protected $fillable = [ // campos a editar en la api 
+    protected $fillable = [
         'nombre',
         'celular',
-        'correo',   
+        'correo',
         'fecha',
         'hora',
     ];

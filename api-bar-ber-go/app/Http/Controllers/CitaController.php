@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\CitaService;
+use App\Services\Cita\Interfaces\CitaServiceInterface;
 use App\Services\Reportes\ReportePDFService;
 
 class CitaController extends Controller
 {
-    protected $citaService;
-    protected $pdfService;
+    protected CitaServiceInterface $citaService;
+    protected ReportePDFService $pdfService;
 
-    public function __construct(CitaService $citaService, ReportePDFService $pdfService)
+    public function __construct(CitaServiceInterface $citaService, ReportePDFService $pdfService)
     {
         $this->citaService = $citaService;
         $this->pdfService = $pdfService;
@@ -58,13 +58,13 @@ class CitaController extends Controller
             'hora' => 'sometimes|required|date_format:H:i',
         ]);
 
-        $updated = $this->citaService->update($id, $data);
+        $cita = $this->citaService->update($id, $data);
 
-        if (!$updated) {
+        if (!$cita) {
             return response()->json(['message' => 'Cita no encontrada'], 404);
         }
 
-        return response()->json($updated, 200);
+        return response()->json($cita, 200);
     }
 
     public function destroy($id)

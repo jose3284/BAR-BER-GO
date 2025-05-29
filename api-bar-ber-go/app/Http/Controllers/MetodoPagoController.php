@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\MetodoPagoService;
+use App\Services\MetodoPago\MetodoPagoService;
 
 class MetodoPagoController extends Controller
 {
-    protected $metodoPagoService;
+    protected MetodoPagoService $metodoPagoService;
 
     public function __construct(MetodoPagoService $metodoPagoService)
     {
@@ -16,12 +16,12 @@ class MetodoPagoController extends Controller
 
     public function index()
     {
-        return response()->json($this->metodoPagoService->getAll());
+        return response()->json($this->metodoPagoService->obtenerTodos());
     }
 
     public function show($id)
     {
-        $metodo = $this->metodoPagoService->find($id);
+        $metodo = $this->metodoPagoService->obtenerPorId($id);
 
         if (!$metodo) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
@@ -36,7 +36,7 @@ class MetodoPagoController extends Controller
             'Metodo_pago' => 'required|string|max:255',
         ]);
 
-        $metodo = $this->metodoPagoService->create($data);
+        $metodo = $this->metodoPagoService->crear($data);
 
         return response()->json($metodo, 201);
     }
@@ -47,7 +47,7 @@ class MetodoPagoController extends Controller
             'Metodo_pago' => 'required|string|max:255',
         ]);
 
-        $metodo = $this->metodoPagoService->update($id, $data);
+        $metodo = $this->metodoPagoService->actualizar($id, $data);
 
         if (!$metodo) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
@@ -58,9 +58,9 @@ class MetodoPagoController extends Controller
 
     public function destroy($id)
     {
-        $deleted = $this->metodoPagoService->delete($id);
+        $eliminado = $this->metodoPagoService->eliminar($id);
 
-        if (!$deleted) {
+        if (!$eliminado) {
             return response()->json(['message' => 'Método de pago no encontrado'], 404);
         }
 

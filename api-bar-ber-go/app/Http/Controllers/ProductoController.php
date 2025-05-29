@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Services\ProductoService;
+use App\Services\Producto\ProductoService;
 use App\Services\Reportes\ReportePDFService;
 
 class ProductoController extends Controller
 {
-    protected $productoService;
-    protected $pdfService;
+    protected ProductoService $productoService;
+    protected ReportePDFService $pdfService;
 
     public function __construct(ProductoService $productoService, ReportePDFService $pdfService)
     {
@@ -19,12 +19,12 @@ class ProductoController extends Controller
 
     public function index()
     {
-        return response()->json($this->productoService->getAll());
+        return response()->json($this->productoService->obtenerTodos());
     }
 
     public function show($id)
     {
-        $producto = $this->productoService->find($id);
+        $producto = $this->productoService->obtenerPorId($id);
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
@@ -43,7 +43,7 @@ class ProductoController extends Controller
             'id_categoria' => 'required|integer'
         ]);
 
-        $producto = $this->productoService->create($data);
+        $producto = $this->productoService->crear($data);
 
         return response()->json($producto, 201);
     }
@@ -58,7 +58,7 @@ class ProductoController extends Controller
             'id_categoria' => 'sometimes|required|integer'
         ]);
 
-        $producto = $this->productoService->update($id, $data);
+        $producto = $this->productoService->actualizar($id, $data);
 
         if (!$producto) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
@@ -69,9 +69,9 @@ class ProductoController extends Controller
 
     public function destroy($id)
     {
-        $deleted = $this->productoService->delete($id);
+        $eliminado = $this->productoService->eliminar($id);
 
-        if (!$deleted) {
+        if (!$eliminado) {
             return response()->json(['message' => 'Producto no encontrado'], 404);
         }
 
@@ -80,12 +80,12 @@ class ProductoController extends Controller
 
     public function estadisticas()
     {
-        return response()->json($this->productoService->getEstadisticas());
+        return response()->json($this->productoService->obtenerEstadisticas());
     }
 
     public function generarPDF()
     {
-        $data = $this->productoService->getPDFData();
+        $data = $this->productoService->obtenerDatosPDF();
         return $this->pdfService->generar('pdf.reporte_productos', $data, 'reporte_productos.pdf');
     }
 }

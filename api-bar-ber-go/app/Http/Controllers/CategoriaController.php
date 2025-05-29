@@ -6,39 +6,42 @@ use App\Models\Categoria;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use App\Services\Categoria\Interfaces\CategoriaServiceInterface;
 
 class CategoriaController extends Controller
 {
-    // GET /api/categorias
+    protected CategoriaServiceInterface $categoriaService;
+
+    public function __construct(CategoriaServiceInterface $categoriaService)
+    {
+        $this->categoriaService = $categoriaService;
+    }
+
     public function index(): JsonResponse
     {
-        return response()->json(Categoria::all());
+        return response()->json($this->categoriaService->all());
     }
 
-    // GET /api/categorias/{categoria}
     public function show(Categoria $categoria): JsonResponse
     {
-        return response()->json($categoria);
+        return response()->json($this->categoriaService->find($categoria));
     }
 
-    // POST /api/categorias
     public function store(StoreCategoriaRequest $request): JsonResponse
     {
-        $categoria = Categoria::create($request->validated());
+        $categoria = $this->categoriaService->create($request->validated());
         return response()->json($categoria, 201);
     }
 
-    // PUT /api/categorias/{categoria}
     public function update(UpdateCategoriaRequest $request, Categoria $categoria): JsonResponse
     {
-        $categoria->update($request->validated());
+        $categoria = $this->categoriaService->update($categoria, $request->validated());
         return response()->json($categoria);
     }
 
-    // DELETE /api/categorias/{categoria}
     public function destroy(Categoria $categoria): JsonResponse
     {
-        $categoria->delete();
+        $this->categoriaService->delete($categoria);
         return response()->json(['message' => 'Categoría eliminada correctamente']);
     }
 }

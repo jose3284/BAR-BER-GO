@@ -14,9 +14,9 @@ class ProductoFactory extends Factory
         return [
             'Nombre' => $this->faker->word(),
             'Cantidad' => $this->faker->numberBetween(1, 100),
-            'Precio' => $this->faker->randomFloat(2, 1, 100),
-            'imagen' => $this->faker->imageUrl(),
-            'id_categoria' => 1, // Asegúrate de tener una categoría creada con este ID
+            'Precio' => $this->faker->randomFloat(2, 10, 1000),
+            'imagen' => $this->faker->imageUrl(640, 480, 'products'),
+            'id_categoria' => \App\Models\Categoria::factory(), // genera categoría relacionada
         ];
     }
 }

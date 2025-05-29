@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Cita;
 
 use App\Models\Cita;
+use App\Services\Cita\Interfaces\CitaServiceInterface;
 
-class CitaService
+class CitaService implements CitaServiceInterface
 {
     public function getAll()
     {
@@ -24,7 +25,6 @@ class CitaService
     public function update($id, array $data)
     {
         $cita = Cita::find($id);
-
         if (!$cita) {
             return null;
         }
@@ -36,22 +36,21 @@ class CitaService
     public function delete($id)
     {
         $cita = Cita::find($id);
-
         if (!$cita) {
             return false;
         }
 
-        return $cita->delete();
+        $cita->delete();
+        return true;
     }
 
     public function getEstadisticas()
     {
         return [
             'total_citas' => Cita::count(),
-            'citas_por_fecha' => Cita::selectRaw('fecha, COUNT(*) as total')
-                ->groupBy('fecha')
-                ->orderBy('fecha', 'asc')
-                ->get()
+            'citas_hoy' => Cita::whereDate('fecha', now()->toDateString())->count(),
+            'primer_cita' => Cita::min('fecha'),
+            'ultima_cita' => Cita::max('fecha'),
         ];
     }
 }
