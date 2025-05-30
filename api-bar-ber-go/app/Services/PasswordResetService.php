@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Mail\ResetPasswordMail;
 use App\Models\Usuario;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,7 @@ class PasswordResetService
     public function sendResetToken(array $data): JsonResponse
     {
         $usuario = Usuario::where('Correo', $data['Correo'])->first();
+
         if (!$usuario) {
             return response()->json(['message' => 'Correo no registrado'], 404);
         }
@@ -23,10 +25,8 @@ class PasswordResetService
         $usuario->reset_expiration = Carbon::now()->addMinutes(30);
         $usuario->save();
 
-        Mail::raw("Tu token de recuperación es: $token", function ($message) use ($usuario) {
-            $message->to($usuario->Correo)
-                    ->subject('Recuperación de contraseña');
-        });
+        // Envía el mailable personalizado
+        Mail::to($usuario->Correo)->send(new ResetPasswordMail($token, $usuario->Correo));
 
         return response()->json(['message' => 'Correo de recuperación enviado']);
     }
