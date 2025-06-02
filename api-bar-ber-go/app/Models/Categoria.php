@@ -11,14 +11,16 @@ class Categoria extends Model
 
     protected $table = 'categoria';
     protected $primaryKey = 'id_categoria';
-    public $incrementing= true;
+    public $incrementing = true;
     public $keyType = 'int';
 
-    protected $fillable = [
-        'categoria'
-    ];
+    protected $fillable = ['categoria'];
 
-    // Relación con productos (1 categoria tiene muchos productos)
+    public function getRouteKeyName(): string
+    {
+        return 'id_categoria';
+    }
+
     public function productos()
     {
         return $this->hasMany(Producto::class, 'id_categoria', 'id_categoria');

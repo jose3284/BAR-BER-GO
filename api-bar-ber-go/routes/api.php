@@ -40,19 +40,20 @@ Route::delete('/usuarios/{id}', [UsersController::class, 'UserDestroy']);
     Route::get('/producto/reporte/pdf', [ProductoController::class, 'generarPDF']);
 // Rutas para los Roles 
 
-Route::get('/roles', [RolController::class, 'RolIndex']);
-Route::get('/roles/{id}', [RolController::class, 'RolShow']);
-Route::post('/roles', [RolController::class, 'RolStore']);
-Route::put('/roles/{id}', [RolController::class, 'RolUpdate']);
-Route::delete('/roles/{id}', [RolController::class, 'RolDestroy']);
+Route::get('/roles', [RolController::class, 'index']);
+Route::get('/roles/{id}', [RolController::class, 'show']);
+Route::post('/roles', [RolController::class, 'store']);
+Route::put('/roles/{id}', [RolController::class, 'update']);
+Route::delete('/roles/{id}', [RolController::class, 'destroy']);
 
 // Rutas para las Categorias    
 
 Route::get('/categorias', [CategoriaController::class, 'index']);
-Route::get('/categorias/{id}', [CategoriaController::class, 'show']);
+Route::get('/categorias/{categoria}', [CategoriaController::class, 'show']);
 Route::post('/categorias', [CategoriaController::class, 'store']);
-Route::put('/categorias/{id}', [CategoriaController::class, 'update']);
-Route::delete('/categorias/{id}', [CategoriaController::class, 'destroy']);
+Route::put('/categorias/{categoria}', [CategoriaController::class, 'update']);
+Route::delete('/categorias/{categoria}', [CategoriaController::class, 'destroy']);
+
 
 // Rutas para los metodos de pago 
 
@@ -64,13 +65,15 @@ Route::delete('/metodo-pago/{id}', [MetodoPagoController::class, 'destroy']);
 
 // Rutas para los recibos
 
-Route::get('/recibos', [ReciboController::class, 'index']);
-Route::get('/recibos/{id}', [ReciboController::class, 'show']);
-Route::post('/recibos', [ReciboController::class, 'store']);
-Route::put('/recibos/{id}', [ReciboController::class, 'update']);
-Route::delete('/recibos/{id}', [ReciboController::class, 'destroy']);
 Route::get('/recibos/estadisticas', [ReciboController::class, 'estadisticas']);
 Route::get('/recibos/pdf', [ReciboController::class, 'generarPDF']);
+
+Route::get('/recibos', [ReciboController::class, 'index']);
+Route::post('/recibos', [ReciboController::class, 'store']);
+Route::get('/recibos/{id}', [ReciboController::class, 'show']);
+Route::put('/recibos/{id}', [ReciboController::class, 'update']);
+Route::delete('/recibos/{id}', [ReciboController::class, 'destroy']);
+
 
 // Autenticación
 Route::post('/login', [LoginController::class, 'login']);
