@@ -20,7 +20,7 @@ const ClienteDashboard = () => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8000/api/logout', {}, {
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/logout', {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.removeItem('token');

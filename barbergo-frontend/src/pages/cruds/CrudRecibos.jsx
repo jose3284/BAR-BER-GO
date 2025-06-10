@@ -22,7 +22,7 @@ const CrudRecibos = () => {
   }, []);
 
   const fetchRecibos = async () => {
-    const response = await axios.get('http://localhost:8000/api/recibos');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/recibos');
     setRecibos(response.data);
   };
 
@@ -33,10 +33,10 @@ const CrudRecibos = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/recibos/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/recibos/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/recibos', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/recibos', formData);
     }
     fetchRecibos();
     setFormData({
@@ -62,7 +62,7 @@ const CrudRecibos = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/recibos/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/recibos/${id}`);
     fetchRecibos();
   };
 

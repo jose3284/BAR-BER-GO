@@ -27,7 +27,7 @@ const Register = () => {
     e.preventDefault();
     setError('');
     try {
-      await axios.post('http://localhost:8000/api/usuarios', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/usuarios', formData);
       navigate('/login');
     } catch (err) {
       setError(err.response?.data?.message || 'Error al registrarse');

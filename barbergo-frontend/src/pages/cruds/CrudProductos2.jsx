@@ -21,7 +21,7 @@ const CrudProductos = () => {
   }, []);
 
   const fetchProductos = async () => {
-    const response = await axios.get('http://localhost:8000/api/producto');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/producto');
     setProductos(response.data);
   };
 
@@ -32,10 +32,10 @@ const CrudProductos = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/producto/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/producto/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/producto', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/producto', formData);
     }
     fetchProductos();
     setFormData({ Nombre: '', Cantidad: '', Precio: '', imagen: '', id_categoria: '' });
@@ -53,7 +53,7 @@ const CrudProductos = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/producto/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/producto/${id}`);
     fetchProductos();
   };
 

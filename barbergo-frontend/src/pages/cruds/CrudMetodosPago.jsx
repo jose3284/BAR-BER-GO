@@ -17,7 +17,7 @@ const CrudMetodosPago = () => {
   }, []);
 
   const fetchMetodos = async () => {
-    const response = await axios.get('http://localhost:8000/api/metodo-pago');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/metodo-pago');
     setMetodos(response.data);
   };
 
@@ -28,10 +28,10 @@ const CrudMetodosPago = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/metodo-pago/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/metodo-pago/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/metodo-pago', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/metodo-pago', formData);
     }
     fetchMetodos();
     setFormData({ Metodo_pago: '' });
@@ -43,7 +43,7 @@ const CrudMetodosPago = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/metodo-pago/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/metodo-pago/${id}`);
     fetchMetodos();
   };
 

@@ -14,7 +14,7 @@ const TiendaVirtual = () => {
   useEffect(() => {
     const fetchProductos = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/api/producto');
+        const res = await axios.get('https://laravel-backend-rdji.onrender.com/api/producto');
         setProductos(res.data);
       } catch (err) {
         console.error('Error al obtener productos', err);
@@ -28,7 +28,7 @@ const TiendaVirtual = () => {
     const hora = fecha.toTimeString().split(' ')[0].slice(0, 5);
 
     try {
-      await axios.post('http://localhost:8000/api/recibos', {
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/recibos', {
         Fecha: fecha.toISOString().split('T')[0],
         Hora: hora,
         Total: producto.Precio,

@@ -15,7 +15,7 @@ const CrudCategorias = () => {
   }, []);
 
   const fetchCategorias = async () => {
-    const response = await axios.get('http://localhost:8000/api/categorias');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/categorias');
     setCategorias(response.data);
   };
 
@@ -26,10 +26,10 @@ const CrudCategorias = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/categorias/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/categorias/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/categorias', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/categorias', formData);
     }
     fetchCategorias();
     setFormData({ categoria: '' });
@@ -41,7 +41,7 @@ const CrudCategorias = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/categorias/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/categorias/${id}`);
     fetchCategorias();
   };
 

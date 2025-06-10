@@ -24,7 +24,7 @@ const CrudUsuarios = () => {
   }, []);
 
   const fetchUsuarios = async () => {
-    const response = await axios.get('http://localhost:8000/api/usuarios');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/usuarios');
     setUsuarios(response.data);
   };
 
@@ -36,10 +36,10 @@ const CrudUsuarios = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/usuarios/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/usuarios/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/usuarios', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/usuarios', formData);
     }
     fetchUsuarios();
     setFormData({ Nombre: '', P_apellido: '', S_apellido: '', Pass: '', Correo: '', id_roles: '', userState: true });
@@ -59,7 +59,7 @@ const CrudUsuarios = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/usuarios/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/usuarios/${id}`);
     fetchUsuarios();
   };
 

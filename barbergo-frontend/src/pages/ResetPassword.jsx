@@ -26,7 +26,7 @@ const ResetPassword = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/api/reset-password', {
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/reset-password', {
         Correo,
         token,
         new_password: newPassword,

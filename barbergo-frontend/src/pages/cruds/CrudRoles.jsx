@@ -15,7 +15,7 @@ const CrudRoles = () => {
   }, []);
 
   const fetchRoles = async () => {
-    const response = await axios.get('http://localhost:8000/api/roles');
+    const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/roles');
     setRoles(response.data);
   };
 
@@ -26,10 +26,10 @@ const CrudRoles = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     if (editId) {
-      await axios.put(`http://localhost:8000/api/roles/${editId}`, formData);
+      await axios.put(`https://laravel-backend-rdji.onrender.com/api/roles/${editId}`, formData);
       setEditId(null);
     } else {
-      await axios.post('http://localhost:8000/api/roles', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/roles', formData);
     }
     fetchRoles();
     setFormData({ nombre_rol: '' });
@@ -41,7 +41,7 @@ const CrudRoles = () => {
   };
 
   const handleDelete = async id => {
-    await axios.delete(`http://localhost:8000/api/roles/${id}`);
+    await axios.delete(`https://laravel-backend-rdji.onrender.com/api/roles/${id}`);
     fetchRoles();
   };
 

@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setError('');
     try {
-      await axios.post('http://localhost:8000/api/forgot-password', { Correo });
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/forgot-password', { Correo });
 
       // Redirige al usuario a la página de validación del token
       navigate('/reset-password', { state: { Correo } }); // <- enviamos el correo por el estado

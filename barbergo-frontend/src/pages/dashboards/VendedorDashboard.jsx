@@ -16,11 +16,11 @@ const VendedorDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/productos/estadisticas')
+    axios.get('https://laravel-backend-rdji.onrender.com/api/productos/estadisticas')
       .then(response => setStats(response.data))
       .catch(error => console.error('Error al obtener estadísticas de productos:', error));
 
-    axios.get('http://localhost:8000/api/recibos/estadisticas')
+    axios.get('https://laravel-backend-rdji.onrender.com/api/recibos/estadisticas')
       .then(response => setReciboStats(response.data))
       .catch(error => console.error('Error al obtener estadísticas de recibos:', error));
   }, []);
@@ -28,7 +28,7 @@ const VendedorDashboard = () => {
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:8000/api/logout', {}, {
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/logout', {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
       localStorage.removeItem('token');
@@ -63,7 +63,7 @@ const VendedorDashboard = () => {
 
   const handleDownloadPDF = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/productos/estadisticas/pdf', {
+      const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/productos/estadisticas/pdf', {
         responseType: 'blob',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -84,7 +84,7 @@ const VendedorDashboard = () => {
 
   const handleDownloadRecibosPDF = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/recibos/pdf', {
+      const response = await axios.get('https://laravel-backend-rdji.onrender.com/api/recibos/pdf', {
         responseType: 'blob',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,

@@ -44,7 +44,7 @@ const AgendarCita = () => {
     }
 
     try {
-      await axios.post('http://localhost:8000/api/cita', formData);
+      await axios.post('https://laravel-backend-rdji.onrender.com/api/cita', formData);
       setMensaje('¡Cita agendada exitosamente!');
       setFormData({
         nombre: '',
